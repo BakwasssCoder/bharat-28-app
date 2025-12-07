@@ -1,0 +1,160 @@
+{
+  "brand": {
+    "name": "BHARAT 28",
+    "tagline": "Food Designed Around You."
+  },
+  "restaurant_phone": "+919XXXXXXXXX",
+  "tax_percent": 0,
+  "menu": [
+    {
+      "id": "bihar-specials",
+      "title": "Bihar Specials",
+      "items": [
+        {
+          "id": "litti-chokha",
+          "name": "Litti Chokha (Plate)",
+          "desc": "Traditional roasted litti served with spiced chokha and ghee.",
+          "price": 149,
+          "tags": ["bihari", "signature", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "sattu-paratha",
+          "name": "Sattu Paratha (2 pcs)",
+          "desc": "Stuffed parathas with sattu, served with curd and pickle.",
+          "price": 119,
+          "tags": ["bihari", "paratha", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "dal-bati-churma",
+          "name": "Dal Bati Churma (Veg)",
+          "desc": "Classic dal with bati and sweet churma.",
+          "price": 199,
+          "tags": ["bihari", "comfort", "vegetarian"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "parathas",
+      "title": "Parathas & Rolls",
+      "items": [
+        {
+          "id": "aloo-paratha",
+          "name": "Aloo Paratha",
+          "desc": "Stuffed potato paratha with butter.",
+          "price": 89,
+          "tags": ["paratha", "vegetarian", "budget"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "paneer-paratha",
+          "name": "Paneer Paratha",
+          "desc": "Cottage cheese stuffed paratha, served with raita.",
+          "price": 119,
+          "tags": ["paratha", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "mixed-paratha",
+          "name": "Mixed Veg Paratha",
+          "desc": "Loaded with seasonal veggies.",
+          "price": 99,
+          "tags": ["paratha", "vegetarian"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "north-indian",
+      "title": "North Indian Classics",
+      "items": [
+        {
+          "id": "butter-chicken",
+          "name": "Butter Chicken (Half)",
+          "desc": "Creamy tomato-based chicken curry.",
+          "price": 229,
+          "tags": ["chicken", "non-veg", "classic"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "paneer-butter-masala",
+          "name": "Paneer Butter Masala",
+          "desc": "Cottage cheese in rich gravy.",
+          "price": 199,
+          "tags": ["vegetarian", "classic"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "rajma-chawal",
+          "name": "Rajma Chawal",
+          "desc": "Comfort kidney beans with steamed rice.",
+          "price": 129,
+          "tags": ["vegetarian", "comfort"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "sides",
+      "title": "Sides & Extras",
+      "items": [
+        {
+          "id": "raita",
+          "name": "Raita",
+          "desc": "Cooling cucumber raita.",
+          "price": 39,
+          "tags": ["side", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "pickles",
+          "name": "Assorted Pickles",
+          "desc": "Homestyle pickles.",
+          "price": 29,
+          "tags": ["side", "condiment"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "papad",
+          "name": "Roasted Papad",
+          "desc": "Crispy roasted papad.",
+          "price": 19,
+          "tags": ["side"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "desserts-drinks",
+      "title": "Desserts & Drinks",
+      "items": [
+        {
+          "id": "rabri",
+          "name": "Rabri",
+          "desc": "Rich condensed milk dessert.",
+          "price": 79,
+          "tags": ["dessert", "traditional"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "masala-chai",
+          "name": "Masala Chai",
+          "desc": "Spiced tea.",
+          "price": 29,
+          "tags": ["drink", "tea"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "lassi",
+          "name": "Sweet Lassi",
+          "desc": "Creamy yogurt drink.",
+          "price": 69,
+          "tags": ["drink", "yogurt"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    }
+  ]
+}

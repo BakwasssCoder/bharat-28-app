@@ -2,24 +2,66 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>Lovable App</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>BHARAT 28 | Food Designed Around You</title>
+    <meta name="description" content="Authentic Indian cuisine in Karol Bagh, New Delhi. Serving Bihar Specials, North Indian classics, and more. Order via WhatsApp for quick delivery." />
+    <meta name="author" content="BHARAT 28" />
+    <meta name="keywords" content="Indian restaurant, Bihar food, Litti Chokha, North Indian, Karol Bagh, Delhi restaurant, WhatsApp order" />
 
-    <!-- TODO: Update og:title to match your application name -->
-    <meta property="og:title" content="Lovable App" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#F97316" />
+    <meta name="msapplication-TileColor" content="#F97316" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="BHARAT 28 | Food Designed Around You" />
+    <meta property="og:description" content="Authentic Indian cuisine. Bihar Specials, North Indian classics. Order via WhatsApp!" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bharat28.com" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:locale" content="en_IN" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
+    <meta name="twitter:title" content="BHARAT 28 | Food Designed Around You" />
+    <meta name="twitter:description" content="Authentic Indian cuisine. Order via WhatsApp!" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="BHARAT 28" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "BHARAT 28",
+        "description": "Authentic Indian cuisine featuring Bihar Specials and North Indian classics",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Karol Bagh",
+          "addressLocality": "New Delhi",
+          "postalCode": "110005",
+          "addressCountry": "IN"
+        },
+        "telephone": "+919XXXXXXXXX",
+        "servesCuisine": ["Indian", "North Indian", "Bihari"],
+        "priceRange": "₹₹",
+        "openingHours": "Mo-Su 11:00-23:00"
+      }
+    </script>
   </head>
 
   <body>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md">
+      Skip to main content
+    </a>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
