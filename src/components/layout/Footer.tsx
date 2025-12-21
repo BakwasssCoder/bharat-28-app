@@ -8,9 +8,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <h3 className="font-display text-2xl font-bold gradient-text mb-4">
-              BHARAT 28
-            </h3>
+            {/* Logo */}
+            <Link to="/" className="transition-transform duration-300 hover:scale-110 inline-block mb-4">
+              <img 
+                src="https://i.postimg.cc/jdhnfLtV/Whats-App-Image-2025-12-21-at-16-56-15-9e47280f.jpg" 
+                alt="BHARAT²⁸ Logo" 
+                className="h-12 w-auto"
+              />
+            </Link>
             <p className="text-muted-foreground text-sm">
               Food Designed Around You. Authentic Indian flavors with a modern twist.
             </p>
@@ -44,15 +49,15 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2 text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-0.5 text-primary" />
-                <span>Karol Bagh, New Delhi - 110005</span>
+                <span>26/1, Bada Bazaar Road, Old rajendra nagar, Karol bagh, 110060</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="h-4 w-4 text-primary" />
-                <span>+91 9XXXXXXXXX</span>
+                <span>+91 9990173075</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Clock className="h-4 w-4 text-primary" />
-                <span>11:00 AM - 11:00 PM</span>
+                <span>05:00 AM - 11:00 PM</span>
               </li>
             </ul>
           </div>
@@ -80,7 +85,14 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} BHARAT 28. All rights reserved.</p>
+          <div className="text-center">
+            <p>© {new Date().getFullYear()} BHARAT²⁸. All rights reserved.</p>
+            <p className="mt-2">
+              Developed By:<br />
+              BakwasssCoder<br />
+              aka Aniket
+            </p>
+          </div>
         </div>
       </div>
     </footer>

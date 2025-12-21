@@ -11,7 +11,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Address',
-    content: 'Karol Bagh, New Delhi - 110005',
+    content: '26/1, Bada Bazaar Road, Old rajendra nagar, Karol bagh, 110060',
   },
   {
     icon: Phone,
@@ -91,14 +91,6 @@ function ContactPage() {
                 </motion.div>
               );
             })}
-
-            {/* Map Placeholder */}
-            <div className="aspect-video rounded-xl bg-muted overflow-hidden border border-border">
-              <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                <MapPin className="h-8 w-8 mr-2" />
-                Map Coming Soon
-              </div>
-            </div>
           </motion.div>
 
           {/* Contact Form */}

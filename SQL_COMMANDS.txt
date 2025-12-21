@@ -1,0 +1,19 @@
+To set up your admin password, please follow these steps:
+
+1. Go to your Supabase dashboard: https://app.supabase.com
+2. Select your project
+3. Navigate to the SQL Editor
+4. Run this SQL command to add the password_hash column:
+   
+   ALTER TABLE admins ADD COLUMN password_hash TEXT;
+
+5. After running that command, run this SQL command to create the admin user with password:
+   
+   INSERT INTO admins (username, role, password_hash) 
+   VALUES ('admin', 'admin', '$2b$10$rVv.F4XaNJ0uSwV.kk.2QO3SZjOFEfB/PdIXrJDxV8M9XqnddHkdO');
+
+The password is already hashed and set to: admin@070601
+
+After completing these steps, you'll be able to log in to the admin panel with:
+Username: admin
+Password: admin@070601

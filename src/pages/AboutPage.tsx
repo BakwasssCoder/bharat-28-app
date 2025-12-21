@@ -34,7 +34,7 @@ function AboutPage() {
             Our <span className="gradient-text">Story</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            BHARAT 28 was born from a simple idea: authentic Indian food should be accessible, 
+            BHARAT²⁸ was born from a simple idea: authentic Indian food should be accessible, 
             affordable, and absolutely delicious. Located in the heart of Karol Bagh, we bring 
             the rich flavors of Bihar and North India to your table.
           </p>

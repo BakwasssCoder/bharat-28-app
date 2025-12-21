@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useCart } from '@/contexts/CartContext';
-import { openWhatsAppOrder, saveOrderToLocal } from '@/utils/whatsapp';
+import { createPendingOrder } from '@/utils/api';
+import { formatWhatsAppMessage, getWhatsAppURL } from '@/utils/whatsapp';
 import { toast } from 'sonner';
 
 function CartPage() {
@@ -28,32 +29,65 @@ function CartPage() {
   const [customerPhone, setCustomerPhone] = useState('');
   const [customerAddress, setCustomerAddress] = useState('');
   const [specialInstructions, setSpecialInstructions] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (items.length === 0) {
       toast.error('Your cart is empty!');
       return;
     }
 
-    const order = {
-      items,
-      subtotal,
-      tax,
-      total,
-      deliveryMode,
-      customerName,
-      customerPhone,
-      customerAddress,
-      specialInstructions,
-    };
+    if (!customerName.trim()) {
+      toast.error('Please enter your name');
+      return;
+    }
 
-    // Save to localStorage for admin
-    saveOrderToLocal(order);
+    if (!customerPhone.trim()) {
+      toast.error('Please enter your phone number');
+      return;
+    }
 
-    // Open WhatsApp
-    openWhatsAppOrder(order);
+    setIsProcessing(true);
 
-    toast.success('Opening WhatsApp to complete your order!');
+    try {
+      // Create pending order in Supabase
+      const orderData = {
+        items,
+        totalAmount: total,
+        customerName,
+        customerPhone,
+        customerAddress: deliveryMode === 'delivery' ? customerAddress : '',
+        specialInstructions,
+      };
+
+      await createPendingOrder(orderData);
+
+      // Clear cart
+      clearCart();
+
+      // Redirect to WhatsApp with order details
+      const message = formatWhatsAppMessage({
+        items,
+        subtotal,
+        tax,
+        total,
+        deliveryMode,
+        customerName,
+        customerPhone,
+        customerAddress: deliveryMode === 'delivery' ? customerAddress : '',
+        specialInstructions,
+      });
+      
+      const url = await getWhatsAppURL(message);
+      window.open(url, '_blank');
+
+      toast.success('Order placed successfully! WhatsApp will open shortly with your order details.');
+    } catch (error) {
+      console.error('Order creation error:', error);
+      toast.error('Failed to place order. Please try again.');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   if (items.length === 0) {
@@ -240,13 +274,23 @@ function CartPage() {
                 size="lg"
                 className="w-full gap-2"
                 onClick={handleCheckout}
+                disabled={isProcessing}
               >
-                <MessageCircle className="h-5 w-5" />
-                Order via WhatsApp
+                {isProcessing ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <MessageCircle className="h-5 w-5" />
+                    Place Order
+                  </>
+                )}
               </Button>
 
               <p className="text-xs text-center text-muted-foreground">
-                Your order will be sent via WhatsApp for confirmation
+                Your order will be saved and we'll contact you for confirmation
               </p>
             </div>
           </motion.div>

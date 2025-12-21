@@ -1,30 +1,69 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, GraduationCap, UtensilsCrossed } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { UtensilsCrossed, ArrowRight, Sparkles, GraduationCap } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
-import menuData from '@/data/menu.json';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
+import { Button } from '@/components/ui/button';
+import { MenuCard } from '@/components/menu/MenuCard';
+import { MenuSkeletonGrid } from '@/components/menu/MenuSkeleton';
+import { getPublicMenuItems, getSiteContent } from '@/utils/api';
 
 function HomePage() {
-  const featuredItems = menuData.menu
-    .flatMap(cat => cat.items)
-    .filter(item => item.tags.includes('signature') || item.tags.includes('classic'))
-    .slice(0, 4);
+  const [menuData, setMenuData] = useState<any>(null);
+  const [siteContent, setSiteContent] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [menuResponse, contentResponse] = await Promise.all([
+          getPublicMenuItems(),
+          getSiteContent()
+        ]);
+        setMenuData(menuResponse);
+        setSiteContent(contentResponse);
+      } catch (err) {
+        setError('Failed to load data');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const featuredItems = menuData?.menu
+    ?.flatMap((cat: any) => cat.items)
+    ?.filter((item: any) => item.tags.includes('featured'))
+    ?.slice(0, 4) || [];
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4">Loading...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center">
+            <p className="text-red-500">{error}</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -53,36 +92,32 @@ function HomePage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl mx-auto text-center"
           >
             {/* Student Discount Badge */}
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 mb-6">
+            <motion.div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 mb-6">
               <GraduationCap className="h-4 w-4 text-accent" />
               <span className="text-sm font-medium text-accent">Student Discount: 10% OFF</span>
             </motion.div>
 
             {/* Brand Name */}
             <motion.h1
-              variants={itemVariants}
               className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-4"
             >
-              <span className="gradient-text">BHARAT 28</span>
+              <span className="gradient-text">{siteContent.brand_name || 'BHARAT²⁸'}</span>
             </motion.h1>
 
             {/* Tagline */}
             <motion.p
-              variants={itemVariants}
               className="text-xl md:text-2xl text-muted-foreground mb-8"
             >
-              {menuData.brand.tagline}
+              {siteContent.tagline || 'Food Designed Around You.'}
             </motion.p>
 
             {/* CTA Buttons */}
             <motion.div
-              variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link to="/menu">
@@ -117,6 +152,31 @@ function HomePage() {
         </motion.div>
       </section>
 
+      {/* Stats Section */}
+      <section className="py-16 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {[
+              { value: '100+', label: 'Happy Customers' },
+              { value: '50+', label: 'Delicious Dishes' },
+              { value: '4.8', label: 'Average Rating' },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="font-display text-4xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-muted-foreground">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Featured Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
@@ -136,7 +196,7 @@ function HomePage() {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredItems.map((item, index) => (
+            {featuredItems.map((item: any, index: number) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -190,7 +250,7 @@ function HomePage() {
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {menuData.menu.map((category, index) => (
+            {menuData?.menu?.slice(0, 5).map((category: any, index: number) => (
               <motion.div
                 key={category.id}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -199,46 +259,16 @@ function HomePage() {
                 transition={{ delay: index * 0.05 }}
               >
                 <Link to={`/menu?category=${category.id}`}>
-                  <div className="group p-6 bg-card rounded-xl text-center hover:shadow-lg transition-all border border-border hover:border-primary">
-                    <h3 className="font-semibold group-hover:text-primary transition-colors">
-                      {category.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {category.items.length} items
+                  <div className="bg-card rounded-xl p-6 text-center shadow-card hover:shadow-lg transition-all border border-border cursor-pointer">
+                    <h3 className="font-semibold">{category.title}</h3>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      {category.items?.length || 0} items
                     </p>
                   </div>
                 </Link>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative rounded-3xl overflow-hidden"
-          >
-            <div className="absolute inset-0 gradient-hero opacity-90" />
-            <div className="relative z-10 p-8 md:p-16 text-center text-white">
-              <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-                Craving Something Delicious?
-              </h2>
-              <p className="text-lg md:text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-                Order now and get your favorite dishes delivered hot and fresh to your doorstep.
-              </p>
-              <Link to="/menu">
-                <Button size="lg" variant="secondary" className="text-lg px-8 py-6 gap-2">
-                  Order Now
-                  <ArrowRight className="h-5 w-5" />
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </Layout>

@@ -1,5 +1,6 @@
 import { CartItem } from '@/contexts/CartContext';
 import menuData from '@/data/menu.json';
+import { getSiteContent } from '@/utils/api';
 
 interface OrderDetails {
   items: CartItem[];
@@ -42,26 +43,25 @@ ${order.deliveryMode === 'delivery' ? `*Address:* ${order.customerAddress || '__
   return message;
 }
 
-export function getWhatsAppURL(message: string): string {
-  const phone = menuData.restaurant_phone.replace(/\D/g, '');
+export async function getWhatsAppURL(message: string): Promise<string> {
+  // Try to get phone number from database first, fallback to menu.json
+  let phone = menuData.restaurant_phone;
+  
+  try {
+    const siteContent = await getSiteContent();
+    if (siteContent.phone_number) {
+      phone = siteContent.phone_number;
+    }
+  } catch (error) {
+    console.warn('Could not fetch phone number from database, using fallback');
+  }
+  
   const encodedMessage = encodeURIComponent(message);
-  return `https://wa.me/${phone}?text=${encodedMessage}`;
+  return `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodedMessage}`;
 }
 
-export function openWhatsAppOrder(order: OrderDetails): void {
+export async function openWhatsAppOrder(order: OrderDetails): Promise<void> {
   const message = formatWhatsAppMessage(order);
-  const url = getWhatsAppURL(message);
+  const url = await getWhatsAppURL(message);
   window.open(url, '_blank');
-}
-
-export function saveOrderToLocal(order: OrderDetails): void {
-  const orders = JSON.parse(localStorage.getItem('bharat28-orders') || '[]');
-  const newOrder = {
-    ...order,
-    id: `order-${Date.now()}`,
-    timestamp: new Date().toISOString(),
-    status: 'pending',
-  };
-  orders.push(newOrder);
-  localStorage.setItem('bharat28-orders', JSON.stringify(orders));
 }

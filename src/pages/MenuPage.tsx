@@ -1,15 +1,13 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Filter, Leaf, X } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { MenuCard } from '@/components/menu/MenuCard';
-import { ItemDetailModal } from '@/components/menu/ItemDetailModal';
 import { MenuSkeletonGrid } from '@/components/menu/MenuSkeleton';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import menuData from '@/data/menu.json';
+import { getPublicMenuItems } from '@/utils/api';
 
 interface MenuItem {
   id: string;
@@ -18,6 +16,8 @@ interface MenuItem {
   price: number;
   tags: string[];
   image?: string;
+  category?: string;
+  categoryTitle?: string;
 }
 
 function MenuPage() {
@@ -27,14 +27,34 @@ function MenuPage() {
     searchParams.get('category') || null
   );
   const [showVegOnly, setShowVegOnly] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [menuData, setMenuData] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch menu data from Supabase
+  useEffect(() => {
+    const fetchMenuData = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getPublicMenuItems();
+        setMenuData(data);
+      } catch (err) {
+        setError('Failed to load menu data');
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMenuData();
+  }, []);
 
   const allItems = useMemo(() => {
-    return menuData.menu.flatMap(cat =>
-      cat.items.map(item => ({ ...item, category: cat.id, categoryTitle: cat.title }))
+    if (!menuData) return [];
+    return menuData.menu.flatMap((cat: any) =>
+      cat.items.map((item: any) => ({ ...item, category: cat.id, categoryTitle: cat.title }))
     );
-  }, []);
+  }, [menuData]);
 
   const filteredItems = useMemo(() => {
     let items = allItems;
@@ -71,6 +91,18 @@ function MenuPage() {
       setSearchParams({});
     }
   };
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center">
+            <p className="text-red-500">{error}</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -136,7 +168,7 @@ function MenuPage() {
             >
               All
             </Button>
-            {menuData.menu.map(category => (
+            {menuData?.menu?.map((category: any) => (
               <Button
                 key={category.id}
                 variant={activeCategory === category.id ? 'default' : 'outline'}
@@ -200,20 +232,12 @@ function MenuPage() {
                 <MenuCard
                   key={item.id}
                   {...item}
-                  onClick={() => setSelectedItem(item)}
                 />
               ))}
             </AnimatePresence>
           </motion.div>
         )}
       </div>
-
-      {/* Item Detail Modal */}
-      <ItemDetailModal
-        item={selectedItem}
-        isOpen={!!selectedItem}
-        onClose={() => setSelectedItem(null)}
-      />
     </Layout>
   );
 }

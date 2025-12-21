@@ -1,0 +1,13 @@
+{
+  "name": "bharat-28-scripts",
+  "version": "1.0.0",
+  "description": "Scripts for BHARAT 28 restaurant system",
+  "main": "init-data.js",
+  "scripts": {
+    "init-db": "node init-data.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.7.0",
+    "bcrypt": "^5.1.1"
+  }
+}

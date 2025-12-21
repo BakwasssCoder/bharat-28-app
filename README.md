@@ -1,73 +1,139 @@
-# Welcome to your Lovable project
+# BHARAT 28 Restaurant Management System
 
-## Project info
+A complete, production-ready restaurant management system with integrated billing and sales tracking.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Features
 
-## How can I edit this code?
+- **Complete Admin Panel** - Secure authentication and dashboard
+- **Billing System** - Counter sales processing with payment modes
+- **Sales Tracking** - Real-time analytics and reporting
+- **Menu Management** - Dynamic menu with categories and items
+- **Content Management** - Editable website content
+- **POS Integration** - Ready for external POS systems
+- **Secure Authentication** - JWT-based login system
+- **Database-Driven** - All content comes from PostgreSQL database
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+### Frontend
+- React with Vite
+- TypeScript
+- Tailwind CSS
+- shadcn/ui components
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### Backend
+- Node.js with Express
+- PostgreSQL database
+- Prisma ORM
+- JWT authentication
 
-Changes made via Lovable will be committed automatically to this repo.
+## Project Structure
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+.
+├── src/                    # Frontend source code
+│   ├── components/         # UI components
+│   ├── pages/              # Page components
+│   ├── contexts/           # React contexts
+│   ├── hooks/              # Custom hooks
+│   ├── utils/              # Utility functions
+│   └── App.tsx             # Main application component
+├── backend/                # Backend API
+│   ├── controllers/         # Request handlers
+│   ├── middleware/         # Authentication middleware
+│   ├── routes/             # API routes
+│   ├── utils/              # Helper functions
+│   ├── prisma/             # Database schema
+│   ├── server.js           # Entry point
+│   └── package.json        # Backend dependencies
+├── DEPLOYMENT_GUIDE.md     # Deployment instructions
+├── ADMIN_USAGE.md          # Admin panel usage guide
+└── IMPLEMENTATION_SUMMARY.md  # Technical implementation details
 ```
 
-**Edit a file directly in GitHub**
+## Quick Start
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. **Install Dependencies**
+   ```bash
+   # Frontend
+   npm install
+   
+   # Backend
+   cd backend
+   npm install
+   ```
 
-**Use GitHub Codespaces**
+2. **Setup Database**
+   ```bash
+   # Make sure PostgreSQL is running
+   cd backend
+   npx prisma migrate dev
+   npx prisma generate
+   npm run init-db
+   ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+3. **Configure Environment**
+   ```bash
+   # Backend - copy and configure .env
+   cd backend
+   cp .env.example .env
+   # Edit .env with your database credentials and JWT secret
+   ```
 
-## What technologies are used for this project?
+4. **Start Servers**
+   ```bash
+   # Start backend (from backend directory)
+   npm run dev
+   
+   # Start frontend (from root directory)
+   npm run dev
+   ```
 
-This project is built with:
+5. **Access Applications**
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:5000
+   - Admin Panel: http://localhost:5173/admin
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Admin Access
 
-## How can I deploy this project?
+Default admin credentials:
+- Username: `admin`
+- Password: `admin123`
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+**Important**: Change the default password after first login!
 
-## Can I connect a custom domain to my Lovable project?
+## API Documentation
 
-Yes, you can!
+See [backend/README.md](backend/README.md) for detailed API documentation.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Deployment
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for deployment instructions.
+
+## Usage Guide
+
+See [ADMIN_USAGE.md](ADMIN_USAGE.md) for admin panel usage instructions.
+
+## Security Features
+
+- Password hashing with bcrypt
+- JWT token authentication
+- Input validation and sanitization
+- Protected API routes
+- Role-based access control
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a pull request
+
+## License
+
+This project is proprietary to BHARAT 28 and should not be distributed without permission.
+
+## Support
+
+For technical support, contact the development team.

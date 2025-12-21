@@ -6,7 +6,7 @@ import { getWhatsAppURL, formatWhatsAppMessage } from '@/utils/whatsapp';
 export function FloatingCTA() {
   const { items, subtotal, tax, total, deliveryMode } = useCart();
 
-  const handleWhatsAppClick = () => {
+  const handleWhatsAppClick = async () => {
     const message = formatWhatsAppMessage({
       items,
       subtotal,
@@ -14,7 +14,7 @@ export function FloatingCTA() {
       total,
       deliveryMode,
     });
-    const url = getWhatsAppURL(message);
+    const url = await getWhatsAppURL(message);
     window.open(url, '_blank');
   };
 
