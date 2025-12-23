@@ -17,7 +17,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-muted-foreground text-sm">
-              Food Designed Around You. Authentic Indian flavors with a modern twist.
+              Taste of tradition. Authentic Indian flavors with a modern twist.
             </p>
           </div>
 

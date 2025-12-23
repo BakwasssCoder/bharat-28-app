@@ -1,8 +1,21 @@
 // API utility functions for the admin panel
 import { supabase } from '@/lib/supabaseClient';
 
-// Use the proxied API path
-const API_BASE_URL = '/api';
+// Dynamic API base URL that works for both development and production
+// In production, you'll need to deploy the backend server separately and update this URL
+const getApiBaseUrl = () => {
+  // For production, you need to set the backend URL as an environment variable
+  // For development, use the proxy
+  if (process.env.NODE_ENV === 'development') {
+    return '/api'; // This will be proxied through Vite during development
+  } else {
+    // In production, use environment variable or default to a backend server
+    // You'll need to deploy your backend server and set this URL
+    return import.meta.env.VITE_API_BASE_URL || 'https://your-backend-domain.com/api';
+  }
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 // Admin authentication
 export const adminLogin = async (username: string, password: string) => {
