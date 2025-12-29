@@ -229,3 +229,64 @@ Check logs in:
 ## Support
 
 For issues with the BHARAT 28 system, contact the development team or check the project documentation.
+
+# Deployment Guide for BHARAT²⁸ Application
+
+## Architecture Overview
+The BHARAT²⁸ application consists of two main components:
+1. **Frontend**: React application (deployed on Vercel)
+2. **Backend**: Node.js API server (needs separate deployment)
+
+## Deployment Steps
+
+### 1. Deploy the Backend Server
+The backend server needs to be deployed separately on a platform like Render, Railway, or Heroku.
+
+#### Option A: Deploy to Render
+1. Create an account at [Render](https://render.com)
+2. Create a new Web Service
+3. Connect to your GitHub repository
+4. Set the root directory to `/backend`
+5. Use the following settings:
+   - Environment: `Node`
+   - Branch: `main`
+   - Build Command: `npm install`
+   - Start Command: `npm start`
+6. Add environment variables in Render dashboard:
+   - SUPABASE_URL
+   - SUPABASE_SERVICE_ROLE_KEY
+   - PORT (set to 10000 or leave blank for default)
+
+#### Option B: Deploy to Railway
+1. Create an account at [Railway](https://railway.app)
+2. Create a new project
+3. Connect to your GitHub repository
+4. Select the `/backend` directory
+5. Deploy the service
+6. Add environment variables in Railway dashboard
+
+### 2. Deploy the Frontend to Vercel
+1. Go to [Vercel](https://vercel.com)
+2. Import your GitHub repository
+3. In the settings, add the following environment variables:
+   - `VITE_API_BASE_URL`: Set to your backend server URL (e.g., `https://your-backend.onrender.com`)
+   - `VITE_SUPABASE_URL`: Your Supabase project URL
+   - `VITE_SUPABASE_ANON_KEY`: Your Supabase anon key
+
+### 3. Environment Variables Required
+
+#### Frontend (Vercel):
+- `VITE_API_BASE_URL`: Your deployed backend server URL
+- `VITE_SUPABASE_URL`: Your Supabase project URL
+- `VITE_SUPABASE_ANON_KEY`: Your Supabase anon key
+
+#### Backend (Render/Railway):
+- `SUPABASE_URL`: Your Supabase project URL
+- `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase service role key
+- `PORT`: Port number (optional, defaults to 5000)
+
+## Important Notes
+- The frontend and backend are separate deployments
+- The frontend makes API calls to the backend server
+- Both need to be properly configured with the correct Supabase credentials
+- CORS should be configured to allow requests between frontend and backend domains
