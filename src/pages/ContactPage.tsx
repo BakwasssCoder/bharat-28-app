@@ -16,12 +16,12 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Phone',
-    content: '+91 9XXXXXXXXX',
+    content: '+91 9999173075',
   },
   {
     icon: Clock,
     title: 'Hours',
-    content: '11:00 AM - 11:00 PM (Daily)',
+    content: '05:00 AM - 11:00 PM (Daily)',
   },
   {
     icon: Mail,

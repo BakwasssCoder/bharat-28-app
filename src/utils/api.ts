@@ -274,23 +274,19 @@ export const printBill = async (token: string, orderId: string) => {
 // Get menu items from Supabase (for public website)
 export const getPublicMenuItems = async () => {
   try {
-    // Use the existing table structure for now
-    const { data, error } = await supabase
-      .from('menu_items')
-      .select(`
-        *,
-        categories (*)
-      `)
-      .eq('is_available', true)
-      .order('name', { ascending: true });
-
-    if (error) {
-      throw new Error(error.message);
+    // Use the API endpoint instead of direct Supabase access
+    const response = await fetch(`${API_BASE_URL}/menu/public/items`);
+    const result = await response.json();
+    
+    if (!result.success) {
+      throw new Error(result.message || 'Failed to fetch menu items');
     }
+    
+    const data = result.menuItems;
 
     // Group items by category
     const categoriesMap: Record<string, any> = {};
-    data.forEach(item => {
+    data.forEach((item: any) => {
       const categoryId = item.category_id;
       if (!categoriesMap[categoryId]) {
         categoriesMap[categoryId] = {
@@ -318,59 +314,45 @@ export const getPublicMenuItems = async () => {
   }
 };
 
-// Get site content from Supabase
+// Get site content from API
 export const getSiteContent = async () => {
-  const { data, error } = await supabase
-    .from('site_content')
-    .select('*');
-
-  if (error) {
-    throw new Error(error.message);
+  try {
+    const response = await fetch(`${API_BASE_URL}/site/content`);
+    const result = await response.json();
+    
+    if (!result.success) {
+      throw new Error(result.message || 'Failed to fetch site content');
+    }
+    
+    const data = result.content;
+    
+    const content: Record<string, string> = {};
+    data.forEach((item: any) => {
+      content[item.key] = item.value;
+    });
+    
+    return content;
+  } catch (error) {
+    console.error('Error fetching site content:', error);
+    throw error;
   }
-
-  const content: Record<string, string> = {};
-  data.forEach(item => {
-    content[item.key] = item.value;
-  });
-
-  return content;
 };
 
-// Create pending order (for WhatsApp orders)
+// Create pending order (for WhatsApp orders) - now using API instead of direct Supabase
 export const createPendingOrder = async (orderData: any) => {
-  const { data, error } = await supabase
-    .from('orders')
-    .insert({
-      order_number: `WEB-${Date.now()}`,
-      customer_name: orderData.customerName,
-      customer_phone: orderData.customerPhone,
-      order_source: 'website_whatsapp',
-      order_status: 'PENDING',
-      total_amount: orderData.totalAmount,
-      payment_mode: null
-    })
-    .select()
-    .single();
+  const response = await fetch(`${API_BASE_URL}/orders/website`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(orderData),
+  });
 
-  if (error) {
-    throw new Error(error.message);
+  const result = await response.json();
+  
+  if (!result.success) {
+    throw new Error(result.message || 'Failed to create order');
   }
-
-  // Create order items
-  const orderItems = orderData.items.map((item: any) => ({
-    order_id: data.id,
-    menu_item_id: item.id,
-    quantity: item.quantity,
-    price_at_order_time: item.price
-  }));
-
-  const { error: itemsError } = await supabase
-    .from('order_items')
-    .insert(orderItems);
-
-  if (itemsError) {
-    throw new Error(itemsError.message);
-  }
-
-  return data;
+  
+  return result.order;
 };

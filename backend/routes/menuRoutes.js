@@ -7,11 +7,15 @@ const {
   getMenuItems,
   createMenuItem,
   updateMenuItem,
-  deleteMenuItem
+  deleteMenuItem,
+  getPublicMenuItems  // Add the new function
 } = require('../controllers/menuController');
 const { authenticateAdmin } = require('../middleware/auth');
 
 const router = express.Router();
+
+// Public routes (for website)
+router.get('/public/items', getPublicMenuItems);  // Public endpoint for menu items
 
 // Protected routes (admin only)
 router.get('/categories', authenticateAdmin, getCategories);

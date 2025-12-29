@@ -1,4 +1,3 @@
-// Prisma Schema for BHARAT 28 Restaurant System
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,52 +7,47 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-// Admin users for the admin panel
 model Admin {
-  id           Int      @id @default(autoincrement())
-  username     String   @unique
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
   passwordHash String
-  role         String   @default("admin")
+  role         String    @default("admin")
   lastLogin    DateTime?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }
 
-// Menu categories (Litti, Paratha, Snacks, etc.)
 model Category {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   menuItems MenuItem[]
 }
 
-// Individual menu items
 model MenuItem {
-  id          Int      @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id])
   name        String
   description String?
   price       Float
-  isAvailable Boolean  @default(true)
+  isAvailable Boolean     @default(true)
   imageUrl    String?
-  isFeatured  Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  isFeatured  Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  category    Category    @relation(fields: [categoryId], references: [id])
   orderItems  OrderItem[]
 }
 
-// Media assets (images, etc.)
 model MediaAsset {
   id         Int      @id @default(autoincrement())
   fileUrl    String
-  uploadedBy Int      // Admin ID who uploaded
+  uploadedBy Int
   createdAt  DateTime @default(now())
 }
 
-// Site content (editable content for homepage, banners, etc.)
 model SiteContent {
   id        Int      @id @default(autoincrement())
   key       String   @unique
@@ -62,7 +56,6 @@ model SiteContent {
   updatedAt DateTime @updatedAt
 }
 
-// Orders (from counter, POS, website, etc.)
 model Order {
   id          Int         @id @default(autoincrement())
   orderNumber String      @unique
@@ -74,20 +67,18 @@ model Order {
   orderItems  OrderItem[]
 }
 
-// Items within an order
 model OrderItem {
-  id           Int      @id @default(autoincrement())
-  orderId      Int
-  order        Order    @relation(fields: [orderId], references: [id])
-  menuItemId   Int
-  menuItem     MenuItem @relation(fields: [menuItemId], references: [id])
-  quantity     Int
-  priceAtSale  Float
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  orderId     Int
+  menuItemId  Int
+  quantity    Int
+  priceAtSale Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  menuItem    MenuItem @relation(fields: [menuItemId], references: [id])
+  order       Order    @relation(fields: [orderId], references: [id])
 }
 
-// Daily sales snapshots for analytics
 model DailySalesSnapshot {
   id           Int      @id @default(autoincrement())
   date         DateTime @unique

@@ -106,7 +106,7 @@ const printKOT = async (req, res) => {
     
     // Get site content for restaurant details
     const { data: siteContent, error: siteError } = await supabase
-      .from('site_content')
+      .from('site_settings')
       .select('*');
       
     if (siteError) {
@@ -186,7 +186,7 @@ const printBill = async (req, res) => {
     
     // Get site content for restaurant details
     const { data: siteContent, error: siteError } = await supabase
-      .from('site_content')
+      .from('site_settings')
       .select('*');
       
     if (siteError) {

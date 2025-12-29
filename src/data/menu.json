@@ -1,157 +1,523 @@
 {
   "brand": {
-    "name": "BHARAT 28",
+    "name": "BHARAT²⁸",
     "tagline": "Food Designed Around You."
   },
-  "restaurant_phone": "+919990173075",
+  "restaurant_phone": "+919999173075",
   "tax_percent": 0,
   "menu": [
     {
-      "id": "bihar-specials",
-      "title": "Bihar Specials",
-      "items": [
-        {
-          "id": "litti-chokha",
-          "name": "Litti Chokha (Plate)",
-          "desc": "Traditional roasted litti served with spiced chokha and ghee.",
-          "price": 149,
-          "tags": ["bihari", "signature", "vegetarian"],
-          "image": "/placeholder.svg"
-        },
-        {
-          "id": "sattu-paratha",
-          "name": "Sattu Paratha (2 pcs)",
-          "desc": "Stuffed parathas with sattu, served with curd and pickle.",
-          "price": 119,
-          "tags": ["bihari", "paratha", "vegetarian"],
-          "image": "/placeholder.svg"
-        },
-        {
-          "id": "dal-bati-churma",
-          "name": "Dal Bati Churma (Veg)",
-          "desc": "Classic dal with bati and sweet churma.",
-          "price": 199,
-          "tags": ["bihari", "comfort", "vegetarian"],
-          "image": "/placeholder.svg"
-        }
-      ]
-    },
-    {
       "id": "parathas",
-      "title": "Parathas & Rolls",
+      "title": "🫓 PARATHAS",
       "items": [
+        {
+          "id": "plain-paratha",
+          "name": "Plain Paratha",
+          "desc": "Basic paratha",
+          "price": 29,
+          "tags": ["paratha", "basic", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
         {
           "id": "aloo-paratha",
           "name": "Aloo Paratha",
-          "desc": "Stuffed potato paratha with butter.",
-          "price": 89,
-          "tags": ["paratha", "vegetarian", "budget"],
+          "desc": "Aloo stuffed paratha",
+          "price": 49,
+          "tags": ["paratha", "vegetarian", "potato"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "aloo-pyaj-paratha",
+          "name": "Aloo Pyaj Paratha",
+          "desc": "Aloo and onion stuffed paratha",
+          "price": 69,
+          "tags": ["paratha", "vegetarian", "onion", "potato"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "pyaj-paratha",
+          "name": "Pyaj Paratha",
+          "desc": "Onion stuffed paratha",
+          "price": 59,
+          "tags": ["paratha", "vegetarian", "onion"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "gobhi-paratha",
+          "name": "Gobhi Paratha",
+          "desc": "Cauliflower stuffed paratha",
+          "price": 69,
+          "tags": ["paratha", "vegetarian", "cauliflower"],
           "image": "/placeholder.svg"
         },
         {
           "id": "paneer-paratha",
           "name": "Paneer Paratha",
-          "desc": "Cottage cheese stuffed paratha, served with raita.",
-          "price": 119,
-          "tags": ["paratha", "vegetarian"],
+          "desc": "Paneer stuffed paratha",
+          "price": 89,
+          "tags": ["paratha", "vegetarian", "paneer"],
           "image": "/placeholder.svg"
         },
         {
-          "id": "mixed-paratha",
-          "name": "Mixed Veg Paratha",
-          "desc": "Loaded with seasonal veggies.",
-          "price": 99,
-          "tags": ["paratha", "vegetarian"],
-          "image": "/placeholder.svg"
-        }
-      ]
-    },
-    {
-      "id": "north-indian",
-      "title": "North Indian Classics",
-      "items": [
-        {
-          "id": "butter-chicken",
-          "name": "Butter Chicken (Half)",
-          "desc": "Creamy tomato-based chicken curry.",
-          "price": 229,
-          "tags": ["chicken", "non-veg", "classic"],
-          "image": "/placeholder.svg"
-        },
-        {
-          "id": "paneer-butter-masala",
-          "name": "Paneer Butter Masala",
-          "desc": "Cottage cheese in rich gravy.",
-          "price": 199,
-          "tags": ["vegetarian", "classic"],
-          "image": "/placeholder.svg"
-        },
-        {
-          "id": "rajma-chawal",
-          "name": "Rajma Chawal",
-          "desc": "Comfort kidney beans with steamed rice.",
-          "price": 129,
-          "tags": ["vegetarian", "comfort"],
-          "image": "/placeholder.svg"
-        }
-      ]
-    },
-    {
-      "id": "sides",
-      "title": "Sides & Extras",
-      "items": [
-        {
-          "id": "raita",
-          "name": "Raita",
-          "desc": "Cooling cucumber raita.",
-          "price": 39,
-          "tags": ["side", "vegetarian"],
-          "image": "/placeholder.svg"
-        },
-        {
-          "id": "pickles",
-          "name": "Assorted Pickles",
-          "desc": "Homestyle pickles.",
-          "price": 29,
-          "tags": ["side", "condiment"],
-          "image": "/placeholder.svg"
-        },
-        {
-          "id": "papad",
-          "name": "Roasted Papad",
-          "desc": "Crispy roasted papad.",
-          "price": 19,
-          "tags": ["side"],
-          "image": "/placeholder.svg"
-        }
-      ]
-    },
-    {
-      "id": "desserts-drinks",
-      "title": "Desserts & Drinks",
-      "items": [
-        {
-          "id": "rabri",
-          "name": "Rabri",
-          "desc": "Rich condensed milk dessert.",
-          "price": 79,
-          "tags": ["dessert", "traditional"],
-          "image": "/placeholder.svg"
-        },
-        {
-          "id": "masala-chai",
-          "name": "Masala Chai",
-          "desc": "Spiced tea.",
-          "price": 29,
-          "tags": ["drink", "tea"],
-          "image": "/placeholder.svg"
-        },
-        {
-          "id": "lassi",
-          "name": "Sweet Lassi",
-          "desc": "Creamy yogurt drink.",
+          "id": "sattu-paratha",
+          "name": "Sattu Paratha",
+          "desc": "Sattu stuffed paratha",
           "price": 69,
-          "tags": ["drink", "yogurt"],
+          "tags": ["paratha", "vegetarian", "sattu"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "mix-paratha",
+          "name": "Mix Paratha",
+          "desc": "Mixed vegetables stuffed paratha",
+          "price": 79,
+          "tags": ["paratha", "vegetarian", "mixed"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "multigrain-paratha",
+          "name": "Multigrain Paratha",
+          "desc": "Multigrain flour paratha",
+          "price": 89,
+          "tags": ["paratha", "vegetarian", "healthy"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "veg-kebab-paratha",
+          "name": "Veg Kebab Paratha",
+          "desc": "Vegetable kebab stuffed paratha",
+          "price": 89,
+          "tags": ["paratha", "vegetarian", "kebab"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "staples",
+      "title": "🍛 STAPLES / MAINS",
+      "items": [
+        {
+          "id": "litti-chokha",
+          "name": "Litti Chokha",
+          "desc": "Traditional roasted litti with spiced chokha",
+          "price": 49,
+          "tags": ["bihari", "traditional", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "litti-chokha-ghee",
+          "name": "Litti Chokha (Desi Ghee)",
+          "desc": "Traditional roasted litti with spiced chokha and desi ghee",
+          "price": 59,
+          "tags": ["bihari", "traditional", "ghee", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "stuffed-multigrain-litti",
+          "name": "Stuffed Multigrain Litti Chokha",
+          "desc": "Multigrain stuffed litti with chokha",
+          "price": 99,
+          "tags": ["bihari", "healthy", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "veg-loaded-litti",
+          "name": "Veg Loaded Litti Chokha",
+          "desc": "Vegetable loaded litti with chokha",
+          "price": 99,
+          "tags": ["bihari", "loaded", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "paneer-stuffed-litti",
+          "name": "Paneer Stuffed Litti Chokha",
+          "desc": "Paneer stuffed litti with chokha",
+          "price": 119,
+          "tags": ["bihari", "paneer", "vegetarian"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "dal-baati",
+      "title": "🍲 DAL BAATI",
+      "items": [
+        {
+          "id": "dal-baati",
+          "name": "Dal Baati",
+          "desc": "Dal with baati",
+          "price": 79,
+          "tags": ["rajasthani", "dal", "baati", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "dal-baati-churma",
+          "name": "Dal Baati Churma",
+          "desc": "Dal with baati and sweet churma",
+          "price": 99,
+          "tags": ["rajasthani", "dal", "baati", "churma", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "dal-baati-combo",
+          "name": "Dal Baati Churma Combo",
+          "desc": "Dal with baati and churma combo (serves 2)",
+          "price": 149,
+          "tags": ["rajasthani", "combo", "dal", "baati", "churma", "vegetarian"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "chole-bhature",
+      "title": "🫔 CHOLE BHATURE",
+      "items": [
+        {
+          "id": "chole-bhature",
+          "name": "Chole Bhature",
+          "desc": "Chole with bhatura",
+          "price": 69,
+          "tags": ["punjabi", "chole", "bhature", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "unlimited-chole-bhature",
+          "name": "Unlimited Chole Bhature (Per Person)",
+          "desc": "Unlimited chole bhature per person",
+          "price": 99,
+          "tags": ["punjabi", "unlimited", "chole", "bhature", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "paneer-chole-bhature",
+          "name": "Paneer Chole Bhature",
+          "desc": "Paneer with chole and bhatura",
+          "price": 129,
+          "tags": ["punjabi", "paneer", "chole", "bhature", "vegetarian"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "rice-meals",
+      "title": "🍚 RICE & MEALS",
+      "items": [
+        {
+          "id": "veg-biryani-half",
+          "name": "Veg Biryani",
+          "desc": "Vegetable biryani (Half)",
+          "price": 89,
+          "tags": ["biryani", "veg", "rice", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "veg-biryani-full",
+          "name": "Veg Biryani",
+          "desc": "Vegetable biryani (Full)",
+          "price": 149,
+          "tags": ["biryani", "veg", "rice", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "chawal-chole-half",
+          "name": "Chawal Chole",
+          "desc": "Rice with chole (Half)",
+          "price": 30,
+          "tags": ["rice", "chole", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "chawal-chole-full",
+          "name": "Chawal Chole",
+          "desc": "Rice with chole (Full)",
+          "price": 60,
+          "tags": ["rice", "chole", "vegetarian"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "snacks",
+      "title": "🍟 SNACKS",
+      "items": [
+        {
+          "id": "spl-kachori-sabji",
+          "name": "SPL Kachori Sabji",
+          "desc": "Special kachori with sabji",
+          "price": 49,
+          "tags": ["kachori", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "pyaj-kachori-sabji",
+          "name": "Pyaj Kachori Sabji",
+          "desc": "Onion kachori with sabji",
+          "price": 59,
+          "tags": ["kachori", "onion", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "dal-kachori-sabji",
+          "name": "Dal Kachori Sabji",
+          "desc": "Dal kachori with sabji",
+          "price": 59,
+          "tags": ["kachori", "dal", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "poori-sabji",
+          "name": "Poori Sabji",
+          "desc": "Poori with sabji",
+          "price": 39,
+          "tags": ["poori", "sabji", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "sattu-kachori",
+          "name": "SPL Sattu Kachori",
+          "desc": "Special sattu kachori",
+          "price": 39,
+          "tags": ["kachori", "sattu", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "aloo-samosa",
+          "name": "Aloo Samosa",
+          "desc": "Aloo stuffed samosa",
+          "price": 19,
+          "tags": ["samosa", "aloo", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "paneer-samosa",
+          "name": "Paneer Samosa",
+          "desc": "Paneer stuffed samosa",
+          "price": 39,
+          "tags": ["samosa", "paneer", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "veg-samosa",
+          "name": "Veg Samosa",
+          "desc": "Vegetable samosa",
+          "price": 29,
+          "tags": ["samosa", "veg", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "bread-pakoda",
+          "name": "Bread Pakoda",
+          "desc": "Bread pakoda",
+          "price": 29,
+          "tags": ["bread", "pakoda", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "paneer-bread-pakoda",
+          "name": "Paneer Bread Pakoda",
+          "desc": "Paneer stuffed bread pakoda",
+          "price": 59,
+          "tags": ["bread", "paneer", "pakoda", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "bedmi-poori",
+          "name": "Bedmi Poori",
+          "desc": "Bedmi poori with sabji",
+          "price": 69,
+          "tags": ["poori", "bedmi", "sabji", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "quick-bites",
+      "title": "🍜 QUICK BITES",
+      "items": [
+        {
+          "id": "plain-maggi",
+          "name": "Plain Maggi",
+          "desc": "Plain maggi",
+          "price": 49,
+          "tags": ["maggi", "quick", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "butter-maggi",
+          "name": "Butter Maggi",
+          "desc": "Butter maggi",
+          "price": 69,
+          "tags": ["maggi", "butter", "quick", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "veg-loaded-maggi",
+          "name": "Veg Loaded Maggi",
+          "desc": "Vegetable loaded maggi",
+          "price": 59,
+          "tags": ["maggi", "loaded", "quick", "snack", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "poha-half",
+          "name": "Poha",
+          "desc": "Poha (Half)",
+          "price": 29,
+          "tags": ["poha", "breakfast", "vegetarian"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "poha-full",
+          "name": "Poha",
+          "desc": "Poha (Full)",
+          "price": 39,
+          "tags": ["poha", "breakfast", "vegetarian"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "tea-drinks",
+      "title": "☕ TEA & HOT DRINKS",
+      "items": [
+        {
+          "id": "tea",
+          "name": "Tea",
+          "desc": "Regular tea",
+          "price": 10,
+          "tags": ["tea", "hot", "beverage"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "kulhad-tea",
+          "name": "SPL Kulhad Tea",
+          "desc": "Special kulhad tea",
+          "price": 20,
+          "tags": ["tea", "kulhad", "hot", "beverage"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "tandoori-tea",
+          "name": "Tandoori Tea",
+          "desc": "Tandoori tea",
+          "price": 20,
+          "tags": ["tea", "tandoori", "hot", "beverage"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "kulhad-tandoori-tea",
+          "name": "SPL Kulhad Tandoori Tea",
+          "desc": "Special kulhad tandoori tea",
+          "price": 30,
+          "tags": ["tea", "kulhad", "tandoori", "hot", "beverage"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "crafted-drinks",
+      "title": "🥤 CRAFTED DRINKS",
+      "items": [
+        {
+          "id": "sattu-shake-small",
+          "name": "High Protein Sattu Shake",
+          "desc": "High protein sattu shake (Small)",
+          "price": 59,
+          "tags": ["sattu", "protein", "shake", "healthy", "beverage"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "sattu-shake-medium",
+          "name": "High Protein Sattu Shake",
+          "desc": "High protein sattu shake (Medium)",
+          "price": 79,
+          "tags": ["sattu", "protein", "shake", "healthy", "beverage"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "sattu-shake-large",
+          "name": "High Protein Sattu Shake",
+          "desc": "High protein sattu shake (Large)",
+          "price": 99,
+          "tags": ["sattu", "protein", "shake", "healthy", "beverage"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "sattu-sharbat-small",
+          "name": "Salted Sattu Sharbat",
+          "desc": "Salted sattu sharbat (Small)",
+          "price": 39,
+          "tags": ["sattu", "sharbat", "beverage"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "sattu-sharbat-medium",
+          "name": "Salted Sattu Sharbat",
+          "desc": "Salted sattu sharbat (Medium)",
+          "price": 49,
+          "tags": ["sattu", "sharbat", "beverage"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "sattu-sharbat-large",
+          "name": "Salted Sattu Sharbat",
+          "desc": "Salted sattu sharbat (Large)",
+          "price": 59,
+          "tags": ["sattu", "sharbat", "beverage"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "saunf-sharbat",
+          "name": "Saunf Sharbat",
+          "desc": "Fennel sharbat",
+          "price": 39,
+          "tags": ["fennel", "sharbat", "beverage"],
+          "image": "/placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "desserts",
+      "title": "🍨 DESSERTS",
+      "items": [
+        {
+          "id": "gajar-halwa",
+          "name": "Gajar Ka Halwa",
+          "desc": "Carrot halwa",
+          "price": 79,
+          "tags": ["dessert", "gajar", "halwa", "sweet"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "moong-dal-halwa",
+          "name": "Moong Dal Halwa",
+          "desc": "Moong dal halwa",
+          "price": 79,
+          "tags": ["dessert", "moong", "dal", "halwa", "sweet"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "kulhad-kheer",
+          "name": "Kulhad Kheer",
+          "desc": "Kulhad kheer",
+          "price": 59,
+          "tags": ["dessert", "kheer", "sweet"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "gulab-jamun",
+          "name": "Gulab Jamun",
+          "desc": "Gulab jamun (1 piece)",
+          "price": 25,
+          "tags": ["dessert", "gulab", "jamun", "sweet"],
+          "image": "/placeholder.svg"
+        },
+        {
+          "id": "rasgulla",
+          "name": "Rasgulla",
+          "desc": "Rasgulla (1 piece)",
+          "price": 25,
+          "tags": ["dessert", "rasgulla", "sweet"],
           "image": "/placeholder.svg"
         }
       ]

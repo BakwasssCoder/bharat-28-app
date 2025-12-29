@@ -6,6 +6,7 @@ const orderRoutes = require('./routes/orderRoutes');
 const salesRoutes = require('./routes/salesRoutes');
 const menuRoutes = require('./routes/menuRoutes');
 const printRoutes = require('./routes/printRoutes'); // Add print routes
+const siteRoutes = require('./routes/siteRoutes'); // Add site routes
 
 // Load environment variables
 dotenv.config();
@@ -30,6 +31,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/sales', salesRoutes);
 app.use('/api/menu', menuRoutes);
 app.use('/api/print', printRoutes); // Add print routes
+app.use('/api/site', siteRoutes); // Add site routes
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -43,6 +45,7 @@ app.get('/', (req, res) => {
       sales: '/api/sales',
       menu: '/api/menu',
       print: '/api/print', // Add print endpoint
+      site: '/api/site', // Add site endpoint
       health: '/health'
     },
     timestamp: new Date().toISOString()

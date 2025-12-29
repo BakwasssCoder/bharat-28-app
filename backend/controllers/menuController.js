@@ -58,8 +58,7 @@ const createCategory = async (req, res) => {
     const { data: category, error } = await supabase
       .from('categories')
       .insert({
-        name: name.trim(),
-        is_active: true
+        name: name.trim()
       })
       .select()
       .single();
@@ -84,7 +83,7 @@ const createCategory = async (req, res) => {
 const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, is_active } = req.body;
+    const { name } = req.body;
     
     // Validate input
     if (!name || name.trim() === '') {
@@ -117,8 +116,7 @@ const updateCategory = async (req, res) => {
     const { data: category, error } = await supabase
       .from('categories')
       .update({
-        name: name.trim(),
-        is_active
+        name: name.trim()
       })
       .eq('id', id)
       .select()
@@ -188,7 +186,7 @@ const getMenuItems = async (req, res) => {
       .from('menu_items')
       .select(`
         *,
-        categories (*)
+        categories (name)
       `)
       .order('name', { ascending: true });
 
@@ -207,10 +205,36 @@ const getMenuItems = async (req, res) => {
   }
 };
 
+// Get all menu items with category information (public endpoint)
+const getPublicMenuItems = async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('menu_items')
+      .select(`
+        *,
+        categories (name)
+      `)
+      .order('name', { ascending: true });
+
+    if (error) throw error;
+    
+    res.json({
+      success: true,
+      menuItems: data
+    });
+  } catch (error) {
+    console.error('Get public menu items error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error'
+    });
+  }
+};
+
 // Create a new menu item
 const createMenuItem = async (req, res) => {
   try {
-    const { name, description, price, category_id, is_available, is_featured, image_url } = req.body;
+    const { name, price, category_id } = req.body;
     
     // Validate input
     if (!name || name.trim() === '') {
@@ -253,16 +277,12 @@ const createMenuItem = async (req, res) => {
       .from('menu_items')
       .insert({
         name: name.trim(),
-        description: description ? description.trim() : null,
         price: parseInt(price),
-        category_id,
-        is_available: is_available !== undefined ? is_available : true,
-        is_featured: is_featured !== undefined ? is_featured : false,
-        image_url: image_url ? image_url.trim() : null
+        category_id
       })
       .select(`
         *,
-        categories (*)
+        categories (name)
       `)
       .single();
 
@@ -286,7 +306,7 @@ const createMenuItem = async (req, res) => {
 const updateMenuItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, price, category_id, is_available, is_featured, image_url } = req.body;
+    const { name, price, category_id } = req.body;
     
     // Validate input
     if (!name || name.trim() === '') {
@@ -329,17 +349,13 @@ const updateMenuItem = async (req, res) => {
       .from('menu_items')
       .update({
         name: name.trim(),
-        description: description ? description.trim() : null,
         price: parseInt(price),
-        category_id,
-        is_available: is_available !== undefined ? is_available : true,
-        is_featured: is_featured !== undefined ? is_featured : false,
-        image_url: image_url ? image_url.trim() : null
+        category_id
       })
       .eq('id', id)
       .select(`
         *,
-        categories (*)
+        categories (name)
       `)
       .single();
 
@@ -393,5 +409,6 @@ module.exports = {
   getMenuItems,
   createMenuItem,
   updateMenuItem,
-  deleteMenuItem
+  deleteMenuItem,
+  getPublicMenuItems  // Export the new function
 };

@@ -20,7 +20,8 @@ export function formatWhatsAppMessage(order: OrderDetails): string {
     .join('\n');
 
   const message = `
-🍽️ *BHARAT 28 — New Order*
+🍽️ *BHARAT²⁸ – TASTE OF TRADITION*
+*New Order*
 
 *Items:*
 ${itemsList}
@@ -38,23 +39,15 @@ ${itemsList}
 ${order.deliveryMode === 'delivery' ? `*Address:* ${order.customerAddress || '___________'}` : ''}
 
 *Special Instructions:* ${order.specialInstructions || 'None'}
-`.trim();
+
+*Thank you for ordering with us!*`.trim();
 
   return message;
 }
 
 export async function getWhatsAppURL(message: string): Promise<string> {
-  // Try to get phone number from database first, fallback to menu.json
-  let phone = menuData.restaurant_phone;
-  
-  try {
-    const siteContent = await getSiteContent();
-    if (siteContent.phone_number) {
-      phone = siteContent.phone_number;
-    }
-  } catch (error) {
-    console.warn('Could not fetch phone number from database, using fallback');
-  }
+  // Use the specific phone number for WhatsApp ordering
+  const phone = '+919999173075';
   
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodedMessage}`;

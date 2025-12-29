@@ -277,6 +277,130 @@ const createPOSOrder = async (req, res) => {
   }
 };
 
+// Create website order (for public website orders via WhatsApp flow)
+const createWebsiteOrder = async (req, res) => {
+  try {
+    const { items, totalAmount, customerName, customerPhone, customerAddress, specialInstructions } = req.body;
+
+    // Validate input
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Items are required and must be an array'
+      });
+    }
+
+    if (!totalAmount || totalAmount <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Valid total amount is required'
+      });
+    }
+
+    if (!customerName || !customerPhone) {
+      return res.status(400).json({
+        success: false,
+        message: 'Customer name and phone are required'
+      });
+    }
+
+    // Validate each item has required fields
+    for (const item of items) {
+      const { id, quantity, price } = item;
+
+      if (!id || !quantity || quantity <= 0 || !price || price <= 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'Each item must have valid id, quantity, and price'
+        });
+      }
+    }
+
+    // Generate unique order number
+    let orderNumber;
+    let isUnique = false;
+    let attempts = 0;
+    
+    while (!isUnique && attempts < 5) {
+      orderNumber = `WEB-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      
+      const { data: existingOrder, error: existingOrderError } = await supabase
+        .from('orders')
+        .select('*')
+        .eq('order_number', orderNumber)
+        .single();
+
+      if (existingOrderError && existingOrderError.code === 'PGRST116') {
+        // No existing order found
+        isUnique = true;
+      } else if (existingOrder) {
+        // Order exists
+        isUnique = false;
+      } else {
+        // Some other error
+        throw existingOrderError;
+      }
+      
+      attempts++;
+    }
+
+    if (!isUnique) {
+      return res.status(500).json({
+        success: false,
+        message: 'Unable to generate unique order number'
+      });
+    }
+
+    // Create order
+    const { data: newOrder, error: orderError } = await supabase
+      .from('orders')
+      .insert({
+        order_number: orderNumber,
+        total_amount: totalAmount,
+        order_source: 'website_whatsapp',
+        order_status: 'PENDING',
+        customer_name: customerName,
+        customer_phone: customerPhone,
+        customer_address: customerAddress || null,
+        special_instructions: specialInstructions || null
+      })
+      .select()
+      .single();
+
+    if (orderError) throw orderError;
+
+    // Create order items
+    const orderItemsWithOrderId = items.map(item => ({
+      order_id: newOrder.id,
+      menu_item_id: item.id,
+      quantity: item.quantity,
+      price_at_sale: item.price
+    }));
+
+    const { data: orderItems, error: orderItemsError } = await supabase
+      .from('order_items')
+      .insert(orderItemsWithOrderId)
+      .select();
+
+    if (orderItemsError) throw orderItemsError;
+
+    // Include order items in the response
+    newOrder.order_items = orderItems;
+
+    res.status(201).json({
+      success: true,
+      message: 'Website order created successfully',
+      order: newOrder
+    });
+  } catch (error) {
+    console.error('Create website order error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error'
+    });
+  }
+};
+
 // Get all orders (for admin dashboard)
 const getAllOrders = async (req, res) => {
   try {
@@ -574,6 +698,7 @@ const deleteOrder = async (req, res) => {
 module.exports = {
   createOrder,
   createPOSOrder,
+  createWebsiteOrder,
   getAllOrders,
   getOrderById,
   confirmOrder,

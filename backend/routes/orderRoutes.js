@@ -2,6 +2,7 @@ const express = require('express');
 const { 
   createOrder, 
   createPOSOrder, 
+  createWebsiteOrder,  // Add the new function
   getAllOrders, 
   getOrderById,
   confirmOrder,
@@ -22,7 +23,8 @@ router.put('/:id/cancel', authenticateAdmin, cancelOrder);
 router.put('/:id/reverse', authenticateAdmin, reverseOrder);
 router.delete('/:id', authenticateAdmin, deleteOrder);  // Add the new route
 
-// Public route (for POS systems)
+// Public routes
 router.post('/pos', createPOSOrder);
+router.post('/website', createWebsiteOrder);  // Add the new route for website orders
 
 module.exports = router;
